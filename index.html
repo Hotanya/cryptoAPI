@@ -1,0 +1,45 @@
+<!-- Hotanya Ragtah -->
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </head>
+
+    <body>
+            <form onsubmit="getPrice()">
+            <input type="text" name="from" id="from" placeholder="From?"> <!-- need to add a help hover window with accepted symbols-->
+            <input type="text" name="to" id="to" placeholder="To?">
+            <input type="submit" value="Submit">
+        </form>
+
+        <h2>Price</h2>
+        <p id="price"> </p> <!-- will eventually be appended here-->
+
+        <script>
+        function getPrice(){
+            var fsymbol = document.getElementById("from").value;   //From Symbol e.g. XRP
+            var tsymbol= document.getElementById("to").value;  //to Symbol(s) e.g. NZD, USD, BTC
+            var theUrl = "https://min-api.cryptocompare.com/data/price?fsym="+ fsymbol + "&tsyms=" + tsymbol;
+           
+            var result;
+            $.ajax({
+                url:theUrl,
+                type:"GET",
+                dataType:"JSON",
+                headers: 
+                {
+                    "Accept": "application/json;odata=verbose"
+                },
+                cache: false,
+                async: false,
+                success: function(data) 
+                {
+                    result = data.NZD; //need to specify .NZD to get the corresponding value
+                    alert(result)
+                }
+                
+            })
+        };
+        
+        </script>
+    </body>
+</html>
