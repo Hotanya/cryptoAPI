@@ -5,20 +5,22 @@
     </head>
 
     <body>
-            <form onsubmit="getPrice()">
+        <form id = "form" onsubmit="getPrice()">
             <input type="text" name="from" id="from" placeholder="From?"> <!-- need to add a help hover window with accepted symbols-->
             <input type="text" name="to" id="to" placeholder="To?">
-            <input type="submit" value="Submit">
+            <input type="submit" id="submit" value="Submit">
         </form>
 
         <h2>Price</h2>
-        <p id="price"> </p> <!-- will eventually be appended here-->
+        <div id = "price">
+            <p id='para'> </p>
+        </div>
 
         <script>
         function getPrice(){
             var fsymbol = document.getElementById("from").value;   //From Symbol e.g. XRP
             var tsymbol= document.getElementById("to").value;  //to Symbol(s) e.g. NZD, USD, BTC
-            var theUrl = "https://min-api.cryptocompare.com/data/price?fsym="+ fsymbol + "&tsyms=" + tsymbol;
+            var theUrl = "https://min-api.cryptocompare.com/data/price?fsym="+ fsymbol.toUpperCase() + "&tsyms=" + tsymbol.toUpperCase();
            
             var result;
             $.ajax({
@@ -34,12 +36,13 @@
                 success: function(data) 
                 {
                     result = data.NZD; //need to specify .NZD to get the corresponding value
-                    alert(result)
+                    alert(result)    
                 }
-                
-            })
-        };
-        
+            })           
+        };  
+
+
         </script>
+
     </body>
 </html>
